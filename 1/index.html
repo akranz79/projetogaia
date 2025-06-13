@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaia Sustentabilidade</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    // Header Component
+    function Header() {
+      return (
+        <header class="bg-green-600 text-white py-4">
+          <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-2xl font-bold">Gaia Sustentabilidade</h1>
+            <nav>
+              <ul class="flex space-x-6">
+                <li><a href="#home" class="hover:underline">Início</a></li>
+                <li><a href="#about" class="hover:underline">Sobre</a></li>
+                <li><a href="#esg" class="hover:underline">Iniciativas ESG</a></li>
+                <li><a href="#contact" class="hover:underline">Contato</a></li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+      );
+    }
+
+    // Hero Component
+    function Hero() {
+      return (
+        <section id="home" class="bg-green-100 py-16 text-center">
+          <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-4">Bem-vindo à Gaia Sustentabilidade</h2>
+            <p class="text-lg mb-6">Liderado pela bióloga Fernanda Paraná, nosso projeto promove a sustentabilidade por meio de iniciativas ESG (Ambiental, Social e Governança).</p>
+            <a href="#esg" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Conheça Nossas Iniciativas</a>
+          </div>
+        </section>
+      );
+    }
+
+    // About Component
+    function About() {
+      return (
+        <section id="about" class="py-16 bg-white">
+          <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6 text-center">Sobre a Gaia</h2>
+            <p class="text-lg mb-4">Gaia Sustentabilidade é uma iniciativa liderada pela bióloga Fernanda Paraná, dedicada a transformar o cenário empresarial com práticas sustentáveis. Com foco em ESG, ajudamos empresas a alinharem seus negócios com os princípios de sustentabilidade ambiental, responsabilidade social e governança ética.</p>
+            <p class="text-lg">Fernanda Paraná, com sua vasta experiência em biologia e sustentabilidade, guia empresas na implementação de práticas que promovem impacto positivo, mantendo a floresta em pé e gerando retornos financeiros sustentáveis.</p>
+          </div>
+        </section>
+      );
+    }
+
+    // ESG Initiatives Component
+    function ESGInitiatives() {
+      const [activeTab, setActiveTab] = useState('environmental');
+
+      const initiatives = {
+        environmental: [
+          { id: 1, title: "Preservação da Amazônia", description: "Projetos de conservação da floresta amazônica, incluindo créditos de carbono e reflorestamento." },
+          { id: 2, title: "Energia Renovável", description: "Apoio à instalação de painéis solares e outras fontes de energia limpa em empresas parceiras." },
+          { id: 3, title: "Gestão de Resíduos", description: "Implementação de programas de reciclagem e economia circular para reduzir o desperdício." }
+        ],
+        social: [
+          { id: 1, title: "Inclusão e Diversidade", description: "Programas para promover equidade de gênero, inclusão de minorias e apoio a comunidades locais." },
+          { id: 2, title: "Educação Sustentável", description: "Workshops e treinamentos sobre sustentabilidade para colaboradores e comunidades." },
+          { id: 3, title: "Saúde e Bem-Estar", description: "Iniciativas para melhorar a qualidade de vida dos colaboradores e comunidades próximas." }
+        ],
+        governance: [
+          { id: 1, title: "Transparência Corporativa", description: "Políticas de compliance e relatórios de sustentabilidade para garantir práticas éticas." },
+          { id: 2, title: "Gestão Ética", description: "Capacitação de lideranças para tomadas de decisão alinhadas aos princípios ESG." },
+          { id: 3, title: "Engajamento com Stakeholders", description: "Diálogo constante com investidores, clientes e comunidades para alinhar estratégias." }
+        ]
+      };
+
+      return (
+        <section id="esg" class="py-16 bg-gray-100">
+          <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6 text-center">Nossas Iniciativas ESG</h2>
+            <div class="flex justify-center mb-6">
+              <button
+                class={`px-4 py-2 mr-2 ${activeTab === 'environmental' ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
+                onClick={() => setActiveTab('environmental')}
+              >
+                Ambiental
+              </button>
+              <button
+                class={`px-4 py-2 mr-2 ${activeTab === 'social' ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
+                onClick={() => setActiveTab('social')}
+              >
+                Social
+              </button>
+              <button
+                class={`px-4 py-2 ${activeTab === 'governance' ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
+                onClick={() => setActiveTab('governance')}
+              >
+                Governança
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {initiatives[activeTab].map(initiative => (
+                <div key={initiative.id} class="bg-white p-6 rounded shadow">
+                  <h3 class="text-xl font-semibold mb-2">{initiative.title}</h3>
+                  <p>{initiative.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Footer Component
+    function Footer() {
+      return (
+        <footer id="contact" class="bg-green-600 text-white py-8">
+          <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">Entre em contato: <a href="mailto:contato@gaia-esg.com.br" class="underline">contato@gaia-esg.com.br</a></p>
+            <p>Siga-nos nas redes sociais: <a href="#" class="underline">LinkedIn</a> | <a href="#" class="underline">Instagram</a></p>
+            <p class="mt-4">© 2025 Gaia Sustentabilidade. Todos os direitos reservados.</p>
+          </div>
+        </footer>
+      );
+    }
+
+    // Main App Component
+    function App() {
+      return (
+        <div>
+          <Header />
+          <Hero />
+          <About />
+          <ESGInitiatives />
+          <Footer />
+        </div>
+      );
+    }
+
+    // Render the App
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
